@@ -31,9 +31,9 @@ def get_args_parser():
 def get_files_hashes(path):
     data = {}
 
-    for directory, subdirs, files in os.walk(path):
+    for root, dirs, files in os.walk(path):
         for fn in files:
-            fp = os.path.join(directory, fn)
+            fp = os.path.join(root, fn)
             with open(fp, 'rb') as f:
                 content = f.read()
                 digest = hashlib.sha256(content).hexdigest()
