@@ -49,14 +49,14 @@ def get_file_hash(file_path):
 
 
 def print_intersection(source_hashes, target_hashes, source_data, target_data):
-    print('Source/target intersection:')
+    print('\nSource/target intersection:')
     intersection = source_hashes & target_hashes
     for i in intersection:
         print(i[0:8], source_data[i], ' -> ', target_data[i])
 
 
 def print_difference(source_hashes, target_hashes, source_data, target_data):
-    print('Source/target difference:')
+    print('\nSource/target difference:')
     difference = source_hashes - target_hashes
     for d in difference:
         print(d[0:8], source_data[d])
