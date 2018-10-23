@@ -7,8 +7,8 @@ import hashlib
 def main():
     parser = argparse.ArgumentParser(description='File duplicate finder')
 
-    parser.add_argument('-s', '--source', help='source path')
-    parser.add_argument('-t', '--target', help='target path')
+    parser.add_argument('source', help='source path')
+    parser.add_argument('target', help='target path')
 
     args = parser.parse_args()
 
