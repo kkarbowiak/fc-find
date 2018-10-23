@@ -34,12 +34,16 @@ def get_files_hashes(path):
     for root, dirs, files in os.walk(path):
         for fn in files:
             fp = os.path.join(root, fn)
-            with open(fp, 'rb') as f:
-                content = f.read()
-                digest = hashlib.sha256(content).hexdigest()
-                data[digest] = fp
+            digest = get_file_hash(fp)
+            data[digest] = fp
 
     return data
+
+
+def get_file_hash(file_path):
+    with open(file_path, 'rb') as f:
+        content = f.read()
+        return hashlib.sha256(content).hexdigest()
 
 
 if __name__ == '__main__':
