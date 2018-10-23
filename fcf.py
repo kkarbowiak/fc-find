@@ -17,7 +17,7 @@ def main():
     print_intersection(source_hashes, target_hashes, source_data, target_data)
 
     if args.difference:
-        print_difference(source_hashes, target_hashes, source_data, target_data)
+        print_difference(source_hashes, target_hashes, source_data)
 
 
 def get_args_parser():
@@ -55,7 +55,7 @@ def print_intersection(source_hashes, target_hashes, source_data, target_data):
         print(i[0:8], source_data[i], ' -> ', target_data[i])
 
 
-def print_difference(source_hashes, target_hashes, source_data, target_data):
+def print_difference(source_hashes, target_hashes, source_data):
     print('\nSource/target difference:')
     difference = source_hashes - target_hashes
     for d in difference:
