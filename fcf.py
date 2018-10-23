@@ -12,24 +12,8 @@ def main():
 
     args = parser.parse_args()
 
-    source_data = {}
-    target_data = {}
-
-    for directory, subdirs, files in os.walk(args.source):
-        for fn in files:
-            fp = os.path.join(directory, fn)
-            with open(fp, 'rb') as f:
-                content = f.read()
-                digest = hashlib.sha256(content).hexdigest()
-                source_data[digest] = fp
-
-    for directory, subdirs, files in os.walk(args.target):
-        for fn in files:
-            fp = os.path.join(directory, fn)
-            with open(fp, 'rb') as f:
-                content = f.read()
-                digest = hashlib.sha256(content).hexdigest()
-                target_data[digest] = fp
+    source_data = get_files_hashes(args.source)
+    target_data = get_files_hashes(args.target)
 
     for sd in source_data.items():
         print(sd)
@@ -42,6 +26,20 @@ def main():
 
     for ih in intersection_hashes:
         print(ih[0:8], source_data[ih], ' -> ', target_data[ih])
+
+
+def get_files_hashes(path):
+    data = {}
+
+    for directory, subdirs, files in os.walk(path):
+        for fn in files:
+            fp = os.path.join(directory, fn)
+            with open(fp, 'rb') as f:
+                content = f.read()
+                digest = hashlib.sha256(content).hexdigest()
+                data[digest] = fp
+
+    return data
 
 
 if __name__ == '__main__':
