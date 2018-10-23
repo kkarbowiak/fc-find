@@ -13,10 +13,8 @@ def main():
 
     source_hashes = set(source_data.keys())
     target_hashes = set(target_data.keys())
-    intersection_hashes = source_hashes & target_hashes
 
-    for ih in intersection_hashes:
-        print(ih[0:8], source_data[ih], ' -> ', target_data[ih])
+    print_intersection(source_hashes, target_hashes, source_data, target_data)
 
     if args.difference:
         print_difference(source_hashes, target_hashes, source_data, target_data)
@@ -48,6 +46,13 @@ def get_file_hash(file_path):
     with open(file_path, 'rb') as f:
         content = f.read()
         return hashlib.sha256(content).hexdigest()
+
+
+def print_intersection(source_hashes, target_hashes, source_data, target_data):
+    print('Source/target intersection:')
+    intersection = source_hashes & target_hashes
+    for i in intersection:
+        print(i[0:8], source_data[i], ' -> ', target_data[i])
 
 
 def print_difference(source_hashes, target_hashes, source_data, target_data):
