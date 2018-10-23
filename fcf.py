@@ -15,11 +15,6 @@ def main():
     source_data = get_files_hashes(args.source)
     target_data = get_files_hashes(args.target)
 
-    for sd in source_data.items():
-        print(sd)
-    for td in target_data.items():
-        print(td)
-
     source_hashes = set(source_data.keys())
     target_hashes = set(target_data.keys())
     intersection_hashes = source_hashes & target_hashes
