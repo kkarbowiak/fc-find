@@ -18,12 +18,16 @@ def main():
     for ih in intersection_hashes:
         print(ih[0:8], source_data[ih], ' -> ', target_data[ih])
 
+    if args.difference:
+        print_difference(source_hashes, target_hashes, source_data, target_data)
+
 
 def get_args_parser():
     parser = argparse.ArgumentParser(description='File duplicate finder')
 
     parser.add_argument('source', help='source path')
     parser.add_argument('target', help='target path')
+    parser.add_argument('-d', '--difference', action='store_true', help='show files in source that are not in target')
 
     return parser
 
@@ -44,6 +48,13 @@ def get_file_hash(file_path):
     with open(file_path, 'rb') as f:
         content = f.read()
         return hashlib.sha256(content).hexdigest()
+
+
+def print_difference(source_hashes, target_hashes, source_data, target_data):
+    print('Source/target difference:')
+    difference = source_hashes - target_hashes
+    for d in difference:
+        print(d[0:8], source_data[d])
 
 
 if __name__ == '__main__':
